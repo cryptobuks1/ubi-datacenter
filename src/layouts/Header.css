@@ -6,14 +6,15 @@
     height: 30px;
     z-index: 1;
 
+    background: transparent;
     transition-timing-function: ease-in;
     transition: all 0.5s;
 }
-.nav__blue {
-    background: #1976d2;
+.nav__white {
+    background: #fff;
 }
-.nav__elementWhite {
-    color: #fff;
+.nav__elementBlack {
+    color: #3f4254 !important;
 }
 .nav__contents {
     width: 100%;
@@ -24,7 +25,6 @@
     top: 0;
     padding: 20px 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     z-index: 1;
 
@@ -32,16 +32,25 @@
     transition: all 0.5s;
 }
 .nav__logo {
-    width: 60px;
+    flex: 0.1;
+    width: 45px;
+    height: 45px;;
     margin-left: 30px;
     object-fit: contain;
     cursor: pointer;
     border-radius: 11px;
 }
+.nav__userLabel {
+    color: #fff;
+    font-weight: 500;
+    font-size: .8rem;
+}
 .nav__right {
+    flex: 0.4;
     display: flex;
     margin-right: 30px;
     align-items: center;
+    justify-content: flex-end;
 }
 .nav__userClickable {
     display: flex;
@@ -49,11 +58,16 @@
     border-radius: 11px;
     cursor: pointer;
     align-items: center;
+    transition: 0.2s;
+}
+.nav__userClickable:hover {
+    background-color: #e8e7e719;
+    border-color: transparent;
 }
 .nav__userAvatar {
     height: 30px;
     width: 30px;
-    border-radius: 50%;
+    border-radius: 7px;
     margin-right: 10px;
     cursor: pointer;
 }
@@ -61,6 +75,7 @@
     margin-left: 10px;
     padding: 10px;
     cursor: pointer;
+    color: #fff;
 }
 .nav__mobile {
     display: none;
@@ -76,5 +91,8 @@
     .nav__mobile {
         display: flex;
         align-items: center;
+    }
+    .nav__right {
+        flex: 0.9;
     }
 }

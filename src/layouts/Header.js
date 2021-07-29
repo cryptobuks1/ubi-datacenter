@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import './Header.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import Menu from '../helpers/Menu';
 
 function Header() {
 
@@ -23,32 +22,32 @@ function Header() {
     }, []);
 
     return (
-        <div className={`nav ${show && 'nav__blue'}`}>
+        <div className={`nav ${show && 'nav__white'}`}>
             <div className='nav__contents'>
                 <img 
                     className='nav__logo'
                     src="/ubi.png"
                     alt=""
                 />
-                
+                <Menu changeColor={show} />
                 <div className='nav__right'>
                     <div className='nav__large'>
                         <div className='nav__userClickable'>
                             <img 
                                 className='nav__userAvatar'
-                                src="http://ubi-as.com/avatar/icons8-mouse-face-96.png"
+                                src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
                                 alt=""
                             /> 
-                            <span className={`nav__userLabel ${show && 'nav__elementWhite'}`}>Hi, Miko</span>
+                            <span className={`nav__userLabel ${show && 'nav__elementBlack'}`}>Hi, Miko</span>
                         </div>
-                        <SettingsIcon className={`nav__settings ${show && 'nav__elementWhite'}`} />
+                        <SettingsIcon className={`nav__settings ${show && 'nav__elementBlack'}`} />
                     </div>
 
                     <div className='nav__mobile'>
-                        <img className='nav__userAvatar' src="http://ubi-as.com/avatar/icons8-mouse-face-96.png"
+                        <img className='nav__userAvatar' src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
                             alt=""
                         />
-                        <MenuIcon className={`nav__settings ${show && 'nav__elementWhite'}`}/>
+                        <MenuIcon className={`nav__settings ${show && 'nav__elementBlack'}`}/>
                     </div> 
                 </div>
             </div>
