@@ -1,7 +1,7 @@
 .nav {
     position: fixed;
     top: 0;
-    padding: 20px;
+    padding: 20px 0;
     width: 100%;
     height: 30px;
     z-index: 1;
@@ -20,10 +20,8 @@
     width: 100%;
     height: 30px;
     background: transparent;
-    position: fixed;
     left: 0;
     top: 0;
-    padding: 20px 0;
     display: flex;
     align-items: center;
     z-index: 1;
@@ -35,7 +33,6 @@
     flex: 0.1;
     width: 45px;
     height: 45px;;
-    margin-left: 30px;
     object-fit: contain;
     cursor: pointer;
     border-radius: 11px;
@@ -48,7 +45,6 @@
 .nav__right {
     flex: 0.4;
     display: flex;
-    margin-right: 30px;
     align-items: center;
     justify-content: flex-end;
 }

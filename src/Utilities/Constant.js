@@ -68,7 +68,6 @@ export default {
     pagesupdatesld: 'pagesupdatesld',
     billingscreatenew: 'billingscreatenew',
     billingsgetall: 'billingsgetall',
-    jobordergetbycreatedby: 'jobordergetbycreatedby',
     joborderdelete: 'joborderdelete',
     joborderedit: 'joborderedit',
     supplierdelete: 'supplierdelete',

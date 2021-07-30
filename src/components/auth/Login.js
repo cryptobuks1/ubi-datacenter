@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MailIcon from '@material-ui/icons/Mail';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import axios from 'axios';
-import Utils from '../../Utilities/Utils';
-import constant from '../../Utilities/Constant';
-import PropTypes from 'prop-types';
+import auth from '../../Utilities/Auth';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,47 +20,19 @@ const useStyles = makeStyles((theme) => ({
         padding: '10px 50px !important'
     }
 }));
-
-async function loginUser(credentials) {
-    let email = credentials.email;
-    let type = 'email';
-    if(!isNaN(credentials.email)) {
-        type = 'number';
-        email =  credentials.email.substring(credentials.email.length - 10,  credentials.email.length);
-    }
-
-    const f = new URLSearchParams();
-    f.append('email', email);
-    f.append('password', credentials.password);
-    f.append('type', type);
-    return axios.post(Utils._getApi(constant.login), f, {
-        headers: ''
-    }).then(response => {
-        const status = response.data.status;
-        if (status) {
-            const data = response.data.data;
-            let authToken = data.token;
-            localStorage.setItem('token', authToken);
-            return authToken;
-        }
-    }).catch(err => {})
-}
   
-function Login({setToken}) {
+function Login(props) {
+    const classes = useStyles();
     let [email, setEmail] = useState();
     let [password, setPassword] = useState();
-
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await loginUser({
+        auth.login({
             email,
             password
-        });
-        console.log(token)
-        setToken(token);
+        },
+        props.history.push('/dashboard'));
     }
-
-    const classes = useStyles();
 
     return (
         <LoginWrapper>
@@ -84,6 +53,7 @@ function Login({setToken}) {
                                     placeholder="Email or Contact Number"
                                     onChange={e => setEmail(e.target.value)}
                                     type="email"
+                                    autocomplete="on"
                                 />
                             </InputContainer>
                         </Grid>
@@ -94,9 +64,10 @@ function Login({setToken}) {
                                     placeholder="Password"
                                     onChange={e => setPassword(e.target.value)}
                                     type="password"
+                                    autocomplete="off"
                                 />
                             </InputContainer>
-                            <ForgotPassword href="javascript:void(0)">Forgot password?</ForgotPassword>
+                            <ForgotPassword href="#!">Forgot password?</ForgotPassword>
                         </Grid>
                         <Grid item className={classes.gridItem}>
                             <ButtonSubmit type="submit">Login</ButtonSubmit>
@@ -108,10 +79,6 @@ function Login({setToken}) {
             <LoginImage/>
         </LoginWrapper>
     )
-}
-
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
 }
 
 const LoginWrapper = styled.div`
