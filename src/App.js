@@ -4,169 +4,53 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  useLocation
 } from "react-router-dom";
 
-import Header from './layouts/Header'
-import AppBody from './layouts/AppBody'
+//Layouts
+import AppBody from './layouts/AppBody';
+
+//Pages
+import Login from './components/auth/Login'
+
 
 function App() {
   return (
     <div className="app">
-      <Header/>
-      <AppBody>
-        <Router>
-          <>
-            <Switch>
-              <Route path="/">
-                
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-                <h1>Test</h1>
-              </Route>
-            </Switch>
-          </>
-        </Router>
-      </AppBody>
+      <Router>
+        <>
+          <TransitionApp/>
+        </>
+      </Router>
+    </div>
+  );
+}
+
+function TransitionApp() {
+  let location = useLocation();
+  return (
+    <div>
+      <Switch location={location}>
+        {/* Pages without layouts */}
+        <Route exact path="/" component={Login} /> 
+
+        {/* Pages with layouts */}
+        <AppBody />
+      </Switch>
+      {/* 
+      
+          <TransitionGroup>
+          <CSSTransition
+            key={location.key}
+            classNames="fade"
+            timeout={300}
+          >
+            
+            ...
+
+          </CSSTransition>
+          </TransitionGroup>
+      */}
     </div>
   );
 }

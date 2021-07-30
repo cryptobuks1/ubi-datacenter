@@ -1,0 +1,47 @@
+import axios from 'axios';
+import Utils from './Utils';
+import constant from './Constant';
+
+class Auth {
+    constructor() {
+        this.authenticated = false;
+        if (localStorage.getItem('token')) {
+            this.authenticated = true;
+        }
+    }
+
+    login(credentials, cb) {
+        let email = credentials.email;
+        let type = 'email';
+        if(!isNaN(credentials.email)) { 
+            type = 'number';
+            email =  credentials.email.substring(credentials.email.length - 10,  credentials.email.length);
+        }
+
+        const f = new URLSearchParams();
+        f.append('email', email);
+        f.append('password', credentials.password);
+        f.append('type', type);
+        axios.post(Utils._getApi(constant.login), f, {
+            headers: ''
+        }).then(response => {
+            const status = response.data.status;
+            if (status) {
+                this.authenticated = true;
+                localStorage.setItem('token', response.data.data.token);
+                cb();
+            }
+        }).catch(err => {})
+    }
+
+    logout() {
+        this.authenticated = false;
+        localStorage.removeItem('token');
+    }
+
+    isAuthenticated() {
+        return this.authenticated;
+    }
+}
+
+export default new Auth();

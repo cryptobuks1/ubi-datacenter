@@ -2,13 +2,14 @@
 
 * {
   margin: 0;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 p, h1, h2, h3, h4, h5, h5, span, label, svg {
   color: #464646;
 }
 body {
-  --ubi-color: #ddd;
+  --ubi-color: #ececec;
+  background-color: #edeff7;
   height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,24 +22,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+.page__body {
+  position: relative;
+  top: -125px;
 }
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
+.active {
+  background-color: #e8e7e719;
+  border-color: transparent;
+  padding: 10px;
+  border-radius: 11px;
 }
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
+.active__white {
+  background-color: #aba5a519;
+  border-color: transparent;
+  padding: 10px;
+  border-radius: 11px;
 }
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+.nav__links {
+  padding: 10px;
+  border-radius: 11px;
+  transition: 0.2s;
+}
+.nav__links_white {
+  padding: 10px;
+  border-radius: 11px;
+  transition: 0.2s;
+}
+.nav__links:hover {
+  background-color: #e8e7e719;
+  border-color: transparent;
+}
+.nav__links_white:hover {
+  background-color: #aba5a519;
+  border-color: transparent;
+}
+.input__icon {
+  color: #8a8986;
 }
