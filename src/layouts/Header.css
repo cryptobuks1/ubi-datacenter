@@ -54,7 +54,7 @@
     border-radius: 11px;
     cursor: pointer;
     align-items: center;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 .nav__userClickable:hover {
     background-color: #e8e7e719;

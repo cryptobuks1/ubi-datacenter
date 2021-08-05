@@ -37,20 +37,6 @@ function TransitionApp() {
         {/* Pages with layouts */}
         <AppBody />
       </Switch>
-      {/* 
-      
-          <TransitionGroup>
-          <CSSTransition
-            key={location.key}
-            classNames="fade"
-            timeout={300}
-          >
-            
-            ...
-
-          </CSSTransition>
-          </TransitionGroup>
-      */}
     </div>
   );
 }
