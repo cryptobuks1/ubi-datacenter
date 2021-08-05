@@ -3,14 +3,8 @@ import Utils from './Utils';
 import constant from './Constant';
 
 class Auth {
-    constructor() {
-        this.authenticated = false;
-        if (localStorage.getItem('token')) {
-            this.authenticated = true;
-        }
-    }
 
-    login(credentials, cb) {
+    login(credentials, redirectTo) {
         let email = credentials.email;
         let type = 'email';
         if(!isNaN(credentials.email)) { 
@@ -27,20 +21,17 @@ class Auth {
         }).then(response => {
             const status = response.data.status;
             if (status) {
-                this.authenticated = true;
                 localStorage.setItem('token', response.data.data.token);
-                cb();
+                localStorage.setItem('id', response.data.data.id);
+
+                console.log('redirec to ', redirectTo);
             }
-        }).catch(err => {})
+         }).catch(err => {})
     }
 
     logout() {
-        this.authenticated = false;
         localStorage.removeItem('token');
-    }
-
-    isAuthenticated() {
-        return this.authenticated;
+        localStorage.removeItem('id');
     }
 }
 

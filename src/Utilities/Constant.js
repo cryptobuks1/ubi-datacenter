@@ -121,5 +121,6 @@ export default {
     ubimaterialsreportgetfiltered: 'ubimaterialsreportgetfiltered',
     ubimaterialsreportgetprojectlist: 'ubimaterialsreportgetprojectlist',
     poeditvolume: 'poeditvolume',
-    ubimaterialsreceivinginsertreport: 'ubimaterialsreceivinginsertreport'
+    ubimaterialsreceivinginsertreport: 'ubimaterialsreceivinginsertreport',
+    validatetoken: 'validatetoken'
  } 
