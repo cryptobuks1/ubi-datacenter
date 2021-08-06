@@ -5,10 +5,12 @@
   font-family: 'Poppins', sans-serif;
 }
 p, h1, h2, h3, h4, h5, h5, span, label, svg {
-  color: #464646;
+  color: #646161;
 }
 body {
   --ubi-color: #ececec;
+  --fade-main-color: #646161;
+  --fade-secondary-color: #535151;
   background-color: #edeff7;
   height: 100%;
   margin: 0;

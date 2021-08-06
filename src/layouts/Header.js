@@ -5,13 +5,12 @@ import './Header.css';
 import Menu from '../helpers/Menu';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import { useDispatch } from "react-redux";
-import { headerSlice } from '../app/modules/Header/headerSlice';
-
+import { Drawer } from '@material-ui/core';
+import SidebarContent from './SidebarContent'
 
 function Header() {
     const [show, handleShow] = useState(false);
-    const { actions } = headerSlice;
+    const [drawerState, setDrawerState] = useState(false);
 
     const transitionNavbar = () => {
         if (window.scrollY > 100) {
@@ -26,10 +25,8 @@ function Header() {
         return () => window.removeEventListener('scroll', transitionNavbar);
     }, []);
 
-    const dispatch = useDispatch();
-
-    const openSidebar = (open) => {
-        dispatch(actions.sidebarDrawerOpen({open: open}));
+    const toggleSidebar = (open) => {
+        setDrawerState(open)
     }
 
     return (
@@ -47,7 +44,7 @@ function Header() {
                                 <Menu changeColor={show} />
                                 <div className='nav__right'>
                                     <div className='nav__large'>
-                                        <div className='nav__userClickable' onClick={() => openSidebar(true)}>
+                                        <div className='nav__userClickable' onClick={() => toggleSidebar(true)}>
                                             <img 
                                                 className='nav__userAvatar'
                                                 src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
@@ -70,6 +67,10 @@ function Header() {
                     </Grid>
                 </Container>
             </div>
+
+            <Drawer anchor="right" open={drawerState} onClose={() => toggleSidebar(false)} disableScrollLock> 
+                <SidebarContent/>
+            </Drawer>
         </>
     )
 }
