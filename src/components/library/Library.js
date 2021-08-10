@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import './Library.css';
-import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Utils from '../../Utilities/Utils';
 import constant from '../../Utilities/Constant';
-
 import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
 import LinkIcon from '@material-ui/icons/Link';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import AddIcon from '@material-ui/icons/Add';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Tooltip from '@material-ui/core/Tooltip';
+import LibraryView from './LibraryView';
+import { 
+    SearchContainer, SearchTitle, InputContainer,
+    InputField, OverlayIconContainer, ThumbnailOverlay,
+    Thumbnail, ThumbnailContainer, LibraryDetailsContainer,
+    TitleLabels, SubtitleLabels
+} from './styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +53,8 @@ function Library() {
     const [defaultLibrary, setDefaultLibrary] = useState([]);
     const [search, setSearch] = useState('');
     const [filteredLibraries, setFilteredLibraries] = useState([]);
+    const [libraryOpen, setLibraryOpen] = useState(false);
+    const [selectedLibrary, setSelectedLibrary] = useState({});
  
     //Fetch Data
     useEffect(() => {
@@ -87,6 +93,15 @@ function Library() {
             setFilteredLibraries(temp); 
         }
     }, [search]);
+
+    const handleOpenDialog = (open, library) => {
+        setLibraryOpen(open);
+        setSelectedLibrary(library)
+    }
+
+    const handleCloseDialog = () => {
+        setLibraryOpen(false);
+    }
 
     return (
         <>
@@ -146,7 +161,7 @@ function Library() {
                                     <ThumbnailOverlay>
                                         <OverlayIconContainer>
                                             <Tooltip title="Edit Library" placement="top"><EditIcon /></Tooltip>
-                                            <Tooltip title="Preview Library" placement="top"><VisibilityIcon /></Tooltip>
+                                            <Tooltip title="Preview Library" placement="top"><VisibilityIcon onClick={() => handleOpenDialog(true, library)}/></Tooltip>
                                             <Tooltip title="Share Library" placement="top"><LinkIcon /></Tooltip>
                                             <Tooltip title="Delete Library" placement="top"><DeleteIcon /></Tooltip>
                                         </OverlayIconContainer>
@@ -166,140 +181,10 @@ function Library() {
                     
                 }
             </Grid>
+
+            <LibraryView openTrigger={libraryOpen} closeTrigger={handleCloseDialog} library={selectedLibrary}/>
         </>
     )
 }
-
-const SearchContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    background-color: #e6daff;
-    border-radius: 5px;
-    background-image: url('/images/svg/find.svg');
-    background-size: 283px;
-    background-repeat: no-repeat;
-    background-position: right;
-
-    @media screen and (max-width: 768px) {
-        background-image: none;
-    }
-`;
-const SearchTitle = styled.p`
-    font-size: 1.3rem;
-    font-weight: 500;
-`;
-
-const InputContainer = styled.div`
-    display: flex;
-    align-items: center;
-    box-shadow: 0 1px 3px rgb(50 50 93 / 15%), 0 1px 0 rgb(0 0 0 / 2%);
-    border-radius: 5px;
-    background: white;
-    height: 50px;
-    width: 400px;
-    padding: 0 10px;
-    margin-top: 27px;
-    @media screen and (max-width: 768px) {
-        width: 92%;
-    }
-`;
-
-const InputField = styled.input`
-    border: 0;
-    outline: none;
-    padding: 10px 15px;
-    width: 100%;
-    background-color: white;
-`;
-
-const OverlayIconContainer = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 50%;
-    column-gap: 23px;
-
-    > .MuiSvgIcon-root {
-        z-index: 1;
-        color: white;
-        transition: all 0.4s;
-    }
-`;
-
-const ThumbnailOverlay = styled.div`
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    -webkit-transition: all .6s ease-in-out;
-    -o-transition: all .6s ease-in-out;
-    transition: all .6s ease-in-out;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    > ${OverlayIconContainer} {
-        cursor: pointer;
-        z-index: 1;
-    }
-`;
-
-const Thumbnail = styled.img`
-    background-repeat: no-repeat;
-    width: 100%;
-    height: auto;
-    -webkit-transition: all .4s ease-in-out;
-    -o-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-`;
-
-const ThumbnailContainer = styled.div`
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    max-height: 200px;
-    cursor: pointer;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-
-    &:hover ${ThumbnailOverlay} {
-        opacity: .8;
-    }
-
-    &:hover ${Thumbnail} {
-        transform: scale(1.2) translateX(0);
-    }
-`;
-
-const LibraryDetailsContainer = styled.div`
-    padding: 20px 15px;
-    text-align: center;
-`;
-
-const TitleLabels = styled.p`
-    font-weight: 500;
-    font-size: 1rem;
-
-    ${({isWhite}) => isWhite &&`
-        color: #fff
-    `}
-`;
-
-const SubtitleLabels = styled.p`
-    font-weight: 400;
-    font-size: .8rem;
-
-    ${({isWhite}) => isWhite &&`
-        color: #fff
-    `}
-`;
 
 export default Library
