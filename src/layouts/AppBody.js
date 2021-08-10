@@ -4,6 +4,7 @@ import SubHeader from './SubHeader';
 import Dashboard from '../components/dashboard/Dashboard';
 import Library from '../components/library/Library';
 import ProtectedRoute from '../helpers/ProtectedRoute';
+import Container from '@material-ui/core/Container';
 
 function AppBody() {
     return (
@@ -12,18 +13,21 @@ function AppBody() {
             <Header />
             <SubHeader />
             
-
-            <ProtectedRoute 
-                exact
-                path="/dashboard"
-                component={Dashboard}
-            />
-            <ProtectedRoute 
-                exact
-                path="/libraries"
-                component={Library}
-            />
-
+            
+            <div className="page__body">
+                <Container>
+                    <ProtectedRoute 
+                        exact
+                        path="/dashboard"
+                        component={Dashboard}
+                    />
+                    <ProtectedRoute 
+                        exact
+                        path="/libraries"
+                        component={Library}
+                    />
+                </Container>
+            </div>
             
         </div>
     )
