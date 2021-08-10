@@ -1,0 +1,21 @@
+.company-logo {
+    height: 60px;
+    width: auto;
+    border-radius: 5px;
+}
+.header__first_text {
+    font-size: .8rem;
+}
+.header__second_container {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    margin-left: auto;
+}
+.margin-l-auto {
+    margin-left: auto;
+}
+.header__second_title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}

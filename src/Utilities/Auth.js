@@ -23,8 +23,6 @@ class Auth {
             if (status) {
                 localStorage.setItem('token', response.data.data.token);
                 localStorage.setItem('id', response.data.data.id);
-
-                console.log('redirec to ', redirectTo);
             }
          }).catch(err => {})
     }
